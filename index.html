@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeşilvadi Zeytinyağları</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lora', serif;
+            background-color: #fdfcf8;
+            overflow-x: hidden; /* Yatay kaydırmayı engelle */
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-dancing-script {
+            font-family: 'Dancing Script', cursive;
+        }
+        .hero-section {
+            height: 100vh; 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background-color: #333; /* Yedek arka plan rengi */
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.45); 
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            animation: fadeInSlideUp 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .cta-button {
+            border: 2px solid white;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+        }
+        .cta-button:hover {
+            background-color: white;
+            color: #2E401E; 
+            transform: scale(1.05);
+        }
+        .feature-card {
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 0.75rem;
+            padding: 1.75rem;
+            text-align: center;
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.05), 0 4px 8px -4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; 
+            height: 100%; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0; 
+            transform: translateY(30px); 
+        }
+        .feature-card.is-visible { 
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.04); 
+            box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.1), 0 8px 16px -6px rgba(0, 0, 0, 0.08); 
+        }
+        .feature-icon {
+            font-size: 2.5rem; 
+            margin-bottom: 1rem;
+            color: #8A9A5B; 
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        .olive-green-dark {
+            color: #2E401E;
+        }
+        .text-custom-gold {
+            color: #B08D57; 
+        }
+        .why-us-section {
+            background-color: #f9f9f9; 
+            overflow: hidden; 
+        }
+        .why-us-content, .why-us-image-container {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .why-us-content.slide-in-left {
+            transform: translateX(-50px);
+        }
+        .why-us-image-container.slide-in-right {
+            transform: translateX(50px);
+        }
+        .why-us-content.is-visible, .why-us-image-container.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .why-us-image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px; 
+        }
+        .why-us-image-container img, .why-us-image-container .loading-indicator {
+            max-width: 100%;
+            max-height: 300px; 
+            width: auto; 
+            height: auto; 
+            object-fit: contain; 
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .loading-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            width:100%;
+            font-family: 'Lora', serif;
+            color: #2E401E;
+            border-radius: 0.75rem;
+            background-color: #f0f0f0;
+        }
+        .animated-section-title {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated-section-title.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .final-cta-card {
+             opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .final-cta-card.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="homePage">
+        <header id="heroSection" class="hero-section"> 
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="font-playfair text-6xl sm:text-7xl md:text-8xl leading-tight drop-shadow-md">Yeşilvadi</h1>
+                <p class="font-dancing-script text-4xl sm:text-5xl md:text-6xl text-custom-gold mt-2 drop-shadow-sm">Zeytinyağları</p>
+                <p class="mt-8 text-xl md:text-2xl max-w-2xl mx-auto">Asırlık Deneyim, Eşsiz Lezzet</p>
+                <div class="mt-10">
+                    <a href="#farkimiz" class="cta-button rounded-full text-lg">
+                        Farkımızı Keşfedin 
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section id="farkimiz" class="why-us-section py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                    <div class="md:w-1/2 text-left why-us-content slide-in-left"> 
+                        <h2 class="text-3xl md:text-4xl font-playfair olive-green-dark mb-6">
+                            Yeşilvadi'nin Sırrı: Doğallık ve Tutku
+                        </h2>
+                        <p class="text-md md:text-lg text-gray-700 leading-relaxed">
+                            Yılların deneyimiyle, zeytinin en saf halini sofralarınıza taşıyoruz. Ege'nin bereketini ve emeğimizi her damlasında hissedeceğiniz Yeşilvadi, sadece bir gıda değil, bir yaşam biçimidir. Kalitemizin ve lezzetimizin ardındaki sırrı keşfedin.
+                        </p>
+                        <p class="text-md md:text-lg text-gray-700 leading-relaxed mt-4">
+                            Biz, doğanın bize sunduğu en değerli hediyeyi özenle işleyerek, geleneksel yöntemleri modern teknolojiyle birleştirip sizlere ulaştırıyoruz. Her bir zeytin tanesi, topraktan şişeye uzanan bu yolculukta titizlikle korunur.
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 mt-8 md:mt-0 why-us-image-container slide-in-right">
+                        <div id="whyUsImageLoadingIndicator" class="loading-indicator" style="height: 250px;"> 
+                            Görsel yükleniyor...
+                        </div>
+                        <img id="whyUsImage" src="" alt="Yeşilvadi Zeytinyağı Konsept" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="py-16 md:py-24 bg-white"> 
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-playfair text-center olive-green-dark mb-12 md:mb-16 animated-section-title">Neden Yeşilvadi?</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+                    <div class="feature-card" style="transition-delay: 0.1s;">
+                        <div>
+                            <div class="feature-icon">💧</div>
+                            <h3 class="text-2xl font-semibold olive-green-dark mb-4">%0.3 Asit Oranı</h3>
+                            <p class="text-gray-600">Düşük asit oranı, zeytinyağımızın saflığını ve üstün kalitesini gösterir, eşsiz bir lezzet sunar.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card" style="transition-delay: 0.2s;">
+                         <div>
+                            <div class="feature-icon">⛰️</div>
+                            <h3 class="text-2xl font-semibold olive-green-dark mb-4">650 Metre Rakım</h3>
+                            <p class="text-gray-600">Zeytinlerimiz, ideal iklim koşullarına sahip 650 metre rakımdaki bahçelerimizde özenle yetiştirilir.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card" style="transition-delay: 0.3s;">
+                        <div>
+                            <div class="feature-icon">✨</div>
+                            <h3 class="text-2xl font-semibold olive-green-dark mb-4">Yüksek Polifenol</h3>
+                            <p class="text-gray-600">Sağlığa faydalı yüksek polifenol içeriği ile antioksidan özelliği taşır, vücudunuzu korur.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card" style="transition-delay: 0.4s;">
+                        <div>
+                             <div class="feature-icon">🌱</div>
+                            <h3 class="text-2xl font-semibold olive-green-dark mb-4">Erken Hasat</h3>
+                            <p class="text-gray-600">Zeytinler henüz yeşilken toplanır, bu sayede daha yoğun aroma ve besin değeri elde edilir.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card lg:col-span-1 xl:col-span-1 sm:col-span-2" style="transition-delay: 0.5s;">
+                        <div>
+                            <div class="feature-icon">❄️</div>
+                            <h3 class="text-2xl font-semibold olive-green-dark mb-4">Soğuk Sıkım</h3>
+                            <p class="text-gray-600">Besin değerlerini ve doğal aromasını korumak için zeytinlerimiz düşük sıcaklıkta (27°C altı) sıkılır.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-16 md:mt-24 text-center max-w-2xl mx-auto p-8 bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl shadow-xl final-cta-card"> 
+                    <div class="feature-icon" style="font-size: 3rem; margin-bottom: 0.5rem;">🍃</div> 
+                    <h3 class="font-playfair text-3xl olive-green-dark mb-4">Bir Tutam Sağlık, Bir Damla Lezzet</h3>
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        Yeşilvadi zeytinyağları, Ege'nin bereketli topraklarından gelen zeytinlerin özenle işlenmesiyle elde edilir. Her damlasında doğallığı ve kaliteyi hissedeceğiniz bu özel yağ, yemeklerinize lezzet katarken sağlığınıza da katkıda bulunur. Geleneksel lezzeti modern dokunuşlarla keşfedin.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-gray-800 text-gray-300 text-center py-10 mt-16">
+            <p>&copy; 2025 Yeşilvadi Zeytinyağları. Tüm hakları saklıdır.</p>
+            <p class="text-sm mt-2">Sağlıklı Yaşamın Kaynağı.</p>
+        </footer>
+    </div>
+
+    <script>
+        function setHeroBackgroundImage() {
+            const heroSection = document.getElementById('heroSection');
+            const primaryUrl = 'https://i.imgur.com/MtNvr6K.png'; // Sizin verdiğiniz Imgur linkinden çıkarılan direkt link (varsayım)
+            const fallbackUrl = 'https://images.pexels.com/photos/1416899/pexels-photo-1416899.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'; // Yedek Pexels linki
+
+            const img = new Image();
+            img.onload = function() {
+                heroSection.style.backgroundImage = `url(${primaryUrl})`;
+            }
+            img.onerror = function() {
+                console.warn('Header için Imgur görseli yüklenemedi, yedek Pexels görseli kullanılıyor.');
+                heroSection.style.backgroundImage = `url(${fallbackUrl})`;
+            }
+            img.src = primaryUrl;
+        }
+
+        function loadWhyUsImage() {
+            const imgElement = document.getElementById('whyUsImage');
+            const loadingIndicator = document.getElementById('whyUsImageLoadingIndicator');
+            const primaryUrl = 'https://i.imgur.com/G7ouF1I.png'; // Sizin verdiğiniz Imgur linkinden çıkarılan direkt link (varsayım)
+            const fallbackUrl = 'https://placehold.co/600x400/A2D477/2E401E?text=Kaliteli+Zeytinya%C4%9F%C4%B1&font=lora';
+
+            loadingIndicator.style.display = 'flex';
+            imgElement.style.display = 'none';
+
+            imgElement.onload = () => {
+                loadingIndicator.style.display = 'none';
+                imgElement.style.display = 'block';
+            };
+            imgElement.onerror = () => {
+                console.warn('"Farkımız" bölümü için Imgur görseli yüklenemedi, yedek yer tutucu kullanılıyor.');
+                imgElement.src = fallbackUrl;
+                imgElement.alt = 'Kaliteli Zeytinyağı Yer Tutucu';
+                // onerror içinde tekrar onload atamaya gerek yok, src değişince tarayıcı tekrar yüklemeyi dener.
+                // Eğer yedek de yüklenemezse, bu sefer tarayıcının kendi bozuk resim ikonu görünür.
+                // Ya da burada daha basit bir yedek (örn: sadece renkli bir kutu) ayarlanabilir.
+                loadingIndicator.style.display = 'none';
+                imgElement.style.display = 'block'; 
+            };
+            imgElement.src = primaryUrl;
+        }
+
+        const observerOptions = {
+            root: null, 
+            rootMargin: '0px',
+            threshold: 0.1 
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    if (!entry.target.classList.contains('feature-card')) { 
+                         observer.unobserve(entry.target); 
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setHeroBackgroundImage(); // Header arka planını ayarla
+            loadWhyUsImage(); // "Farkımız" bölümü için görseli yükle
+
+            const ctaButton = document.querySelector('.cta-button');
+            if(ctaButton) {
+                ctaButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href'); 
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start' 
+                        });
+                    }
+                });
+            }
+            
+            const animatedElements = document.querySelectorAll('.why-us-content, .why-us-image-container, .animated-section-title, .feature-card, .final-cta-card');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
